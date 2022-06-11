@@ -6,6 +6,7 @@ const app=express();
 
 app.use(express.json())
 
+
 // app.use("/auth",signup)
 app.use("/auth",authrouter)
 // app.use("/auth",login)

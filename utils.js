@@ -4,12 +4,12 @@ var key="secret"
 const passwordcompare=async(dbpassword,eneteredpass)=>{
 try {
     
-
+// return true;
 return await bcrypt.compare(dbpassword,eneteredpass)
 
 } catch (error) {
     
-    return true;
+    return false;
 }
 }
 

@@ -2,6 +2,7 @@ const { json } = require("express/lib/response")
 const {passwordcompare,jwtgen}=require("../utils")
 const user=require("../model/model")
 const signup=(req,res)=>{
+    console.log(req.body)
 const tata=new user({
     name:req.body.name,
     email:req.body.email,
@@ -15,7 +16,7 @@ tata.save()
 })
 .catch((err)=>{
     res.json({
-        message:err.message
+        message:"err.message"
     })
 })
 }
@@ -23,11 +24,11 @@ tata.save()
 const login=(req,res)=>{
     user.findOne({name:req.body.name})
     .then((result)=>{
-        passwordcompare(result.password,req.body.password).then(data=>{
-console.log(result.password)
-console.log(req.body.password)
+        passwordcompare(req.body.password,result.password).then(data=>{
+console.log("result await",result.password)
+console.log("req.body pass",req.body.password)
 console.log(data)
-            if(result.password){
+            if(data){
      jwtgen(result.name).then(token=>{
 
         return  res.json({
