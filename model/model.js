@@ -3,10 +3,13 @@ const Scemamodel=new mongoose.Schema({
     name:{
         type:String,
     },
-    email:{
+    price:{
         type:String,
     },
-    password:{
+    quantity:{
+        type:String,
+    },
+    brand:{
         type:String,
     }
 

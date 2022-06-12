@@ -6,8 +6,9 @@ const signup=(req,res)=>{
     var postd=req.body.name
 const tata=new user({
     name:postd.name,
-    email:postd.email,
-    password:postd.password
+    price:postd.price,
+    quantity:postd.quantity,
+    brand:postd.brand
 })
 tata.save()
 .then(()=>{
@@ -83,7 +84,7 @@ const upone=(req,res)=>{
   var  _id=req.params.id
   var body= (req.body.values)
     console.log(body) 
-     user.findByIdAndUpdate(_id,{name:body.name,email:body.email})
+     user.findByIdAndUpdate(_id,{name:body.name,price:body.price,brand:body.brand,quantity:body.quantity})
 .then(()=>console.log("updated"))
 .catch((err)=>console.log(err))   
    
