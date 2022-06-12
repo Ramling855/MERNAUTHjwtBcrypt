@@ -2,11 +2,12 @@ const { json } = require("express/lib/response")
 const {passwordcompare,jwtgen}=require("../utils")
 const user=require("../model/model")
 const signup=(req,res)=>{
-    console.log(req.body)
+    console.log(req.body.name)
+    var postd=req.body.name
 const tata=new user({
-    name:req.body.name,
-    email:req.body.email,
-    password:req.body.password
+    name:postd.name,
+    email:postd.email,
+    password:postd.password
 })
 tata.save()
 .then(()=>{
@@ -20,6 +21,10 @@ tata.save()
     })
 })
 }
+
+
+
+
 
 const login=(req,res)=>{
     user.findOne({name:req.body.name})
@@ -56,10 +61,46 @@ res.json({
 }
 
 
-
-
+const data=(req,res)=>{
+    user.find().then((all)=>{
+        res.send(all)
+    }).catch(()=>{
+        res.send("err")
+    })
+    
+}
+const onedelete=(req,res)=>{
+   console.log(req.params.id) 
+    user.findByIdAndDelete(req.params.id).then((all)=>{
+        res.send(all)
+    }).catch(()=>{
+        res.send("err")
+    })
+    
+}
+const upone=(req,res)=>{
+    console.log(req.params.id)
+  var  _id=req.params.id
+  var body= (req.body.values)
+    console.log(body) 
+     user.findByIdAndUpdate(_id,{name:body.name,email:body.email})
+.then(()=>console.log("updated"))
+.catch((err)=>console.log(err))   
+   
+   
+     //  .then((all)=>{
+        
+    //      res.send(all)
+    //  }).catch(()=>{
+    //      res.send("err")
+    //  })
+     
+ }
 
 module.exports={
     signup,
-    login
+    login,
+    data,
+    onedelete,
+    upone
 }

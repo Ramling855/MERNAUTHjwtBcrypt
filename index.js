@@ -2,6 +2,8 @@
 const dbconnect=require("./db")
 const app =require("./app")
 require("dotenv").config();
+const cors =require("cors")
+app.use(cors())
 
 const port=process.env.PORT||2000
 app.get("/",(req,res)=>{
